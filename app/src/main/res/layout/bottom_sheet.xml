@@ -103,7 +103,8 @@
                         android:id="@+id/textTimeBottomSheet"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Время" />
+                        android:text="Время"
+                        android:textColor="@color/textDarkGrey" />
 
                     <EditText
                         android:id="@+id/editTextTimeBottomSheet"
@@ -145,7 +146,8 @@
                         android:id="@+id/textAudiceBottomSheet"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Аудитория" />
+                        android:text="Аудитория"
+                        android:textColor="@color/textDarkGrey" />
 
                     <EditText
                         android:id="@+id/editTextAudiceBottomSheet"

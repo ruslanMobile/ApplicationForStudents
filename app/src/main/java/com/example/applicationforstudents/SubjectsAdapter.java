@@ -21,15 +21,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.example.applicationforstudents.Room.Subject;
+
 import java.util.List;
 
-public class SubjectsAdapter extends ArrayAdapter<Subject> {
+public class SubjectsAdapter extends ArrayAdapter<com.example.applicationforstudents.Room.Subject> {
     private LayoutInflater layoutInflater;
-    private List<Subject> list;
+    private List<com.example.applicationforstudents.Room.Subject> list;
     private int layout;
 
-    public SubjectsAdapter(Context context, int resource, List<Subject> objects) {
-        super(context, resource, objects);
+    public SubjectsAdapter(Context context, int resource, List<com.example.applicationforstudents.Room.Subject> objects) {
+        super(context,resource,objects);
         this.layoutInflater = LayoutInflater.from(context);
         this.layout = resource;
         this.list = objects;

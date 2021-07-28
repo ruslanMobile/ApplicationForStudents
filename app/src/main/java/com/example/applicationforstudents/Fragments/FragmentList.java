@@ -45,7 +45,7 @@ public class FragmentList extends Fragment {
     CustomBottomSheet customBottomSheet;
     ViewModelMy myModel;
     TextView textNameOfDay;
-    DataBaseManager dataBaseManager;
+    //DataBaseManager dataBaseManager;
     ListView listViewOfDay;
     String fullDate;
 
@@ -54,14 +54,18 @@ public class FragmentList extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_list, container, false);
     }
-//1x1x1
-    //7
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //Підключення ViewModel для збереження Calendar при зміні
         myModel = new ViewModelProvider(this).get(ViewModelMy.class);
-        myModel.getLiveData().observe(getViewLifecycleOwner(), observerViewModel);
+        myModel.getLiveData().observe(getViewLifecycleOwner(), new Observer<List<com.example.applicationforstudents.Room.Subject>>() {
+            @Override
+            public void onChanged(List<com.example.applicationforstudents.Room.Subject> subjects) {
+
+            }
+        });
         /*
         if(savedInstanceState == null)
             calendar = Calendar.getInstance();
@@ -85,24 +89,25 @@ public class FragmentList extends Fragment {
     }
 
     //Слухач для ViewModel
-    Observer<Calendar> observerViewModel = new Observer<Calendar>() {
-        @Override
-        public void onChanged(Calendar calendarNew) {
-            calendar = calendarNew;
-            //Установка назви дня
-            int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
-            Date date = new Date();
-            date.setTime(calendar.getTimeInMillis());
-            String dayWeekText = new SimpleDateFormat("EEEE").format(date);
-            textNameOfDay.setText(dayWeekText.substring(0, 1).toUpperCase() + dayWeekText.substring(1));
+//    Observer<Calendar> observerViewModel = new Observer<Calendar>() {
+//        @Override
+//        public void onChanged(Calendar calendarNew) {
+//            calendar = calendarNew;
+//            //Установка назви дня
+//            int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+//            Date date = new Date();
+//            date.setTime(calendar.getTimeInMillis());
+//            String dayWeekText = new SimpleDateFormat("EEEE").format(date);
+//            textNameOfDay.setText(dayWeekText.substring(0, 1).toUpperCase() + dayWeekText.substring(1));
+//
+//                /*DateTime dateTime = new DateTime(calendar.getTime());
+//                horizontalPicker.setDate(dateTime);*/
+//            Log.d("MyLog", "SetDate " + calendar.getTime() + " , " + dayOfWeek + " , " + dayWeekText);
+//
+//            resetListView();
+//        }
+//    };
 
-                /*DateTime dateTime = new DateTime(calendar.getTime());
-                horizontalPicker.setDate(dateTime);*/
-            Log.d("MyLog", "SetDate " + calendar.getTime() + " , " + dayOfWeek + " , " + dayWeekText);
-
-            resetListView();
-        }
-    };
 
 
     AdapterView.OnItemClickListener clickListListener = new AdapterView.OnItemClickListener() {
@@ -114,7 +119,7 @@ public class FragmentList extends Fragment {
     };
 
     public void resetListView() {
-        Date date = new Date();
+       /* Date date = new Date();
         date.setTime(calendar.getTimeInMillis());
         fullDate = new SimpleDateFormat("yyyy.MM.dd").format(date);
 
@@ -124,7 +129,7 @@ public class FragmentList extends Fragment {
 
         SubjectsAdapter adapter = new SubjectsAdapter(getContext(), R.layout.item_subject, subjects);
         listViewOfDay.setAdapter(adapter);
-        setListViewHeightBasedOnChildren(listViewOfDay);
+        setListViewHeightBasedOnChildren(listViewOfDay);*/
     }
 
     public void setListViewHeightBasedOnChildren(ListView listView) {
@@ -169,11 +174,15 @@ public class FragmentList extends Fragment {
            /* calendar.set(Calendar.YEAR,year);
             calendar.set(Calendar.MONTH,month);
             calendar.set(Calendar.DAY_OF_MONTH,dayOfMonth);*/
-            Calendar calendar1 = Calendar.getInstance();
+
+
+            /*Calendar calendar1 = Calendar.getInstance();
             calendar1.set(Calendar.YEAR, year);
             calendar1.set(Calendar.MONTH, month);
             calendar1.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-            myModel.setData(calendar1);
+            myModel.setData(calendar1);*/
+
+
             Log.d("MyLog", calendar.getTime().toString());
         }
     };
@@ -209,11 +218,22 @@ public class FragmentList extends Fragment {
             calendar.set(Calendar.MONTH,dateSelected.getMonthOfYear()-1);
             calendar.set(Calendar.DAY_OF_MONTH,dateSelected.getDayOfMonth());*/
             //myModel.setData(dateSelected);
-            Calendar calendar1 = Calendar.getInstance();
+
+            /*Calendar calendar1 = Calendar.getInstance();
             calendar1.set(Calendar.YEAR, dateSelected.getYear());
             calendar1.set(Calendar.MONTH, dateSelected.getMonthOfYear() - 1);
             calendar1.set(Calendar.DAY_OF_MONTH, dateSelected.getDayOfMonth());
-            myModel.setData(calendar1);
+            myModel.setData(calendar1);*/
+
+            Date date = new Date();
+            date.setTime(calendar.getTimeInMillis());
+            fullDate = new SimpleDateFormat("yyyy.MM.dd").format(date);
+
+            List<com.example.applicationforstudents.Room.Subject> subjects = myModel.getSubjectsToDate(fullDate);
+
+            SubjectsAdapter adapter = new SubjectsAdapter(getContext(), R.layout.item_subject, subjects);
+            listViewOfDay.setAdapter(adapter);
+            setListViewHeightBasedOnChildren(listViewOfDay);
             Log.d("MyLog", "================" + calendar.getTime());
         }
     };
