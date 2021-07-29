@@ -23,8 +23,8 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.applicationforstudents.R;
 import com.example.applicationforstudents.Architecture.ViewModelMy;
+import com.example.applicationforstudents.Room.Subject;
 import com.example.applicationforstudents.SQLite.DataBaseManager;
-import com.example.applicationforstudents.Subject;
 import com.example.applicationforstudents.SubjectsAdapter;
 import com.github.jhonnyx2012.horizontalpicker.DatePickerListener;
 import com.github.jhonnyx2012.horizontalpicker.HorizontalPicker;
@@ -66,6 +66,7 @@ public class FragmentList extends Fragment {
 
             }
         });
+//        myModel.insert(new Subject("Українська мова","Олена Ярославівна","Лекція","10:00-11:20","123А","Купити зошит для робіт","2021.07.29"));
         /*
         if(savedInstanceState == null)
             calendar = Calendar.getInstance();
@@ -130,6 +131,18 @@ public class FragmentList extends Fragment {
         SubjectsAdapter adapter = new SubjectsAdapter(getContext(), R.layout.item_subject, subjects);
         listViewOfDay.setAdapter(adapter);
         setListViewHeightBasedOnChildren(listViewOfDay);*/
+
+
+        Date date = new Date();
+        date.setTime(calendar.getTimeInMillis());
+        fullDate = new SimpleDateFormat("yyyy.MM.dd").format(date);
+        Log.d("MyLog", "Fulldate" + fullDate);
+        List<com.example.applicationforstudents.Room.Subject> subjects = myModel.getSubjectsToDate(fullDate);
+
+        SubjectsAdapter adapter = new SubjectsAdapter(getContext(), R.layout.item_subject, subjects);
+        listViewOfDay.setAdapter(adapter);
+        setListViewHeightBasedOnChildren(listViewOfDay);
+        Log.d("MyLog", "================" + calendar.getTime() + " " + subjects.size());
     }
 
     public void setListViewHeightBasedOnChildren(ListView listView) {
@@ -179,10 +192,13 @@ public class FragmentList extends Fragment {
             /*Calendar calendar1 = Calendar.getInstance();
             calendar1.set(Calendar.YEAR, year);
             calendar1.set(Calendar.MONTH, month);
-            calendar1.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-            myModel.setData(calendar1);*/
+            calendar1.set(Calendar.DAY_OF_MONTH, dayOfMonth);*/
+            //myModel.setData(calendar1);
 
-
+            calendar.set(Calendar.YEAR, year);
+            calendar.set(Calendar.MONTH, month);
+            calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            resetListView();
             Log.d("MyLog", calendar.getTime().toString());
         }
     };
@@ -222,19 +238,13 @@ public class FragmentList extends Fragment {
             /*Calendar calendar1 = Calendar.getInstance();
             calendar1.set(Calendar.YEAR, dateSelected.getYear());
             calendar1.set(Calendar.MONTH, dateSelected.getMonthOfYear() - 1);
-            calendar1.set(Calendar.DAY_OF_MONTH, dateSelected.getDayOfMonth());
-            myModel.setData(calendar1);*/
+            calendar1.set(Calendar.DAY_OF_MONTH, dateSelected.getDayOfMonth());*/
+          //  myModel.setData(calendar1);
 
-            Date date = new Date();
-            date.setTime(calendar.getTimeInMillis());
-            fullDate = new SimpleDateFormat("yyyy.MM.dd").format(date);
-
-            List<com.example.applicationforstudents.Room.Subject> subjects = myModel.getSubjectsToDate(fullDate);
-
-            SubjectsAdapter adapter = new SubjectsAdapter(getContext(), R.layout.item_subject, subjects);
-            listViewOfDay.setAdapter(adapter);
-            setListViewHeightBasedOnChildren(listViewOfDay);
-            Log.d("MyLog", "================" + calendar.getTime());
+            calendar.set(Calendar.YEAR, dateSelected.getYear());
+            calendar.set(Calendar.MONTH, dateSelected.getMonthOfYear() - 1);
+            calendar.set(Calendar.DAY_OF_MONTH, dateSelected.getDayOfMonth());
+            resetListView();
         }
     };
 
@@ -253,6 +263,7 @@ public class FragmentList extends Fragment {
         date.setTime(calendar.getTimeInMillis());
         String dayWithMonth = new SimpleDateFormat("EEEE, d MMMM").format(date), fullDate = new SimpleDateFormat("yyyy.MM.dd").format(date);
 
+        Log.d("MyLog","StartBottomSheet ==== " + calendar.getTime());
         Bundle bundle = new Bundle();
         bundle.putString("fullDate", fullDate);
         bundle.putString("dayWithMonth", dayWithMonth.substring(0, 1).toUpperCase() + dayWithMonth.substring(1));

@@ -4,7 +4,7 @@ import android.content.Context;
 
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
-@androidx.room.Database(entities = {Subject.class},version = 1)
+@androidx.room.Database(entities = {Subject.class},version = 2)
 public abstract class Database extends RoomDatabase {
     public abstract SubjectDao getDao();
     public static Database INSTANCE;

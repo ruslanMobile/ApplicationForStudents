@@ -18,7 +18,7 @@ public interface SubjectDao {
     List<Subject> getSubjectsToDate(String date_);
 
     @Query("SELECT * FROM subjects WHERE id= :id")
-    Cursor getCursorForId(long id);
+    Subject getElementForId(long id);
 
     @Insert
     void insert(Subject subject);

@@ -2,6 +2,7 @@ package com.example.applicationforstudents.Architecture;
 
 import android.app.Application;
 import android.content.Context;
+import android.database.Cursor;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -42,5 +43,18 @@ public class ViewModelMy extends AndroidViewModel {
     }
     public List<Subject> getSubjectsToDate(String date){
         return repository.getSubjectsToDate(date);
+    }
+
+    public void insert(Subject subject){
+        repository.insert(subject);
+    }
+    public void upDate(Subject subject){
+       repository.upDate(subject);
+    }
+    public  void deleteForId(Subject subject){
+       repository.deleteForId(subject);
+    }
+    public Subject getElementForId(long id){
+        return repository.getElementForId(id);
     }
 }
