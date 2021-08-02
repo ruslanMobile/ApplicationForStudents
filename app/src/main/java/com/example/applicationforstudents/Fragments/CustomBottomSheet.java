@@ -76,6 +76,9 @@ public class CustomBottomSheet extends BottomSheetDialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //Ініціалізація елементів
         bundle = getArguments();
+
+        subject = (Subject) bundle.getSerializable("subject");
+
         View view = inflater.inflate(R.layout.bottom_sheet, container, false);
         textNameOfDay = view.findViewById(R.id.textNameOfDayBottomSheet);
         textNameOfDay.setText(bundle.getString("dayWithMonth"));
@@ -121,7 +124,7 @@ public class CustomBottomSheet extends BottomSheetDialogFragment {
             editTextNote.setText(cursor.getString(cursor.getColumnIndex(Constants.COLUMN_NOTE)));
             dataBaseManager.close();*/
 
-            subject = viewModelMy.getElementForId(idEl+1);
+            //subject = viewModelMy.getElementForId(idEl+1);
             editTextSubject.setText(subject.getName());
             editTextTime.setText(subject.getTime());
             editTextAudience.setText(subject.getAudience());

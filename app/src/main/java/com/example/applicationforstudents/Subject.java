@@ -1,6 +1,8 @@
 package com.example.applicationforstudents;
 
-public class Subject {
+import java.io.Serializable;
+
+public class Subject   {
     private String name,teacher,type,time,audience,note,date;
 
     public Subject(String name, String teacher, String type, String time, String audience, String note, String date) {

@@ -1,6 +1,7 @@
 package com.example.applicationforstudents.Fragments;
 
 import android.app.DatePickerDialog;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -120,7 +122,8 @@ public class FragmentList extends Fragment {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             startBottomSheet(id);
-            Log.d("MyLog", "id List=" + id);
+            Log.d("MyLog", "id List = " + id + " pos " + position);
+
         }
     };
 
@@ -137,7 +140,8 @@ public class FragmentList extends Fragment {
             }
         }
 
-        SubjectsAdapter adapter = new SubjectsAdapter(getContext(), R.layout.item_subject, changeList);
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        SubjectsAdapter adapter = new SubjectsAdapter(getContext(), R.layout.item_subject, changeList,date,fragmentManager);
         listViewOfDay.setAdapter(adapter);
         setListViewHeightBasedOnChildren(listViewOfDay);
         Log.d("MyLog", "================" + calendar.getTime() + " " + subjectList.size());
