@@ -35,6 +35,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 public class FragmentList extends Fragment {
@@ -48,6 +49,9 @@ public class FragmentList extends Fragment {
     //DataBaseManager dataBaseManager;
     ListView listViewOfDay;
     String fullDate;
+
+    //
+    List<Subject> subjectList = new LinkedList<>();
 
     @Nullable
     @Override
@@ -63,10 +67,12 @@ public class FragmentList extends Fragment {
         myModel.getLiveData().observe(getViewLifecycleOwner(), new Observer<List<com.example.applicationforstudents.Room.Subject>>() {
             @Override
             public void onChanged(List<com.example.applicationforstudents.Room.Subject> subjects) {
-
+                Log.d("MyLog", "+++ Change Live DAta");
+                subjectList = subjects;
+                resetListView();
             }
         });
-//        myModel.insert(new Subject("Українська мова","Олена Ярославівна","Лекція","10:00-11:20","123А","Купити зошит для робіт","2021.07.29"));
+        // myModel.insert(new Subject("Українська моваuu","Олена","Лекція","10:00-11:20","123А","Купити зошит для робіт","2021.08.02"));
         /*
         if(savedInstanceState == null)
             calendar = Calendar.getInstance();
@@ -110,39 +116,31 @@ public class FragmentList extends Fragment {
 //    };
 
 
-
     AdapterView.OnItemClickListener clickListListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             startBottomSheet(id);
-            Log.d("MyLog","id List=" + id);
+            Log.d("MyLog", "id List=" + id);
         }
     };
 
     public void resetListView() {
-       /* Date date = new Date();
-        date.setTime(calendar.getTimeInMillis());
-        fullDate = new SimpleDateFormat("yyyy.MM.dd").format(date);
-
-        dataBaseManager = new DataBaseManager(getContext());
-        dataBaseManager.open();
-        List<Subject> subjects = dataBaseManager.getSubjectsToDate(fullDate);
-
-        SubjectsAdapter adapter = new SubjectsAdapter(getContext(), R.layout.item_subject, subjects);
-        listViewOfDay.setAdapter(adapter);
-        setListViewHeightBasedOnChildren(listViewOfDay);*/
-
-
         Date date = new Date();
         date.setTime(calendar.getTimeInMillis());
         fullDate = new SimpleDateFormat("yyyy.MM.dd").format(date);
         Log.d("MyLog", "Fulldate" + fullDate);
-        List<com.example.applicationforstudents.Room.Subject> subjects = myModel.getSubjectsToDate(fullDate);
 
-        SubjectsAdapter adapter = new SubjectsAdapter(getContext(), R.layout.item_subject, subjects);
+        List<Subject> changeList = new LinkedList<>();
+        for(Subject el:subjectList){
+            if(el.getDate().equals(fullDate)){
+                changeList.add(el);
+            }
+        }
+
+        SubjectsAdapter adapter = new SubjectsAdapter(getContext(), R.layout.item_subject, changeList);
         listViewOfDay.setAdapter(adapter);
         setListViewHeightBasedOnChildren(listViewOfDay);
-        Log.d("MyLog", "================" + calendar.getTime() + " " + subjects.size());
+        Log.d("MyLog", "================" + calendar.getTime() + " " + subjectList.size());
     }
 
     public void setListViewHeightBasedOnChildren(ListView listView) {
@@ -167,7 +165,7 @@ public class FragmentList extends Fragment {
         }
 
         ViewGroup.LayoutParams params = listView.getLayoutParams();
-        params.height = (int) (totalHeight + ((listView.getDividerHeight()+(getResources().getDimension(R.dimen.dividerHeight)/2)) * (listAdapter.getCount())));
+        params.height = (int) (totalHeight + ((listView.getDividerHeight() + (getResources().getDimension(R.dimen.dividerHeight) / 2)) * (listAdapter.getCount())));
 
         listView.setLayoutParams(params);
         listView.requestLayout();
@@ -239,7 +237,7 @@ public class FragmentList extends Fragment {
             calendar1.set(Calendar.YEAR, dateSelected.getYear());
             calendar1.set(Calendar.MONTH, dateSelected.getMonthOfYear() - 1);
             calendar1.set(Calendar.DAY_OF_MONTH, dateSelected.getDayOfMonth());*/
-          //  myModel.setData(calendar1);
+            //  myModel.setData(calendar1);
 
             calendar.set(Calendar.YEAR, dateSelected.getYear());
             calendar.set(Calendar.MONTH, dateSelected.getMonthOfYear() - 1);
@@ -257,13 +255,13 @@ public class FragmentList extends Fragment {
         }
     };
 
-    public void startBottomSheet(long id){
+    public void startBottomSheet(long id) {
         Date date = new Date();
         customBottomSheet = new CustomBottomSheet();
         date.setTime(calendar.getTimeInMillis());
         String dayWithMonth = new SimpleDateFormat("EEEE, d MMMM").format(date), fullDate = new SimpleDateFormat("yyyy.MM.dd").format(date);
 
-        Log.d("MyLog","StartBottomSheet ==== " + calendar.getTime());
+        Log.d("MyLog", "StartBottomSheet ==== " + calendar.getTime());
         Bundle bundle = new Bundle();
         bundle.putString("fullDate", fullDate);
         bundle.putString("dayWithMonth", dayWithMonth.substring(0, 1).toUpperCase() + dayWithMonth.substring(1));

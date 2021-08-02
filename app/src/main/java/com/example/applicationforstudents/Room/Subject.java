@@ -25,6 +25,20 @@ public class Subject {
         this.date = date;
     }
 
+    @Override
+    public String toString() {
+        return "Subject{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", teacher='" + teacher + '\'' +
+                ", type='" + type + '\'' +
+                ", time='" + time + '\'' +
+                ", audience='" + audience + '\'' +
+                ", note='" + note + '\'' +
+                ", date='" + date + '\'' +
+                '}';
+    }
+
     public int getId() {
         return id;
     }
