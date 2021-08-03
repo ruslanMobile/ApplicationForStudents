@@ -91,7 +91,7 @@ public class FragmentList extends Fragment {
         buttonAddElement.setOnClickListener(addElement);
 
         listViewOfDay = view.findViewById(R.id.listViewOfDay);
-        listViewOfDay.setOnItemClickListener(clickListListener);
+        //listViewOfDay.setOnItemClickListener(clickListListener);
 
         horizontalPicker = (HorizontalPicker) view.findViewById(R.id.datePicker);
         createHorizontalPicker();
@@ -118,14 +118,14 @@ public class FragmentList extends Fragment {
 //    };
 
 
-    AdapterView.OnItemClickListener clickListListener = new AdapterView.OnItemClickListener() {
+   /* AdapterView.OnItemClickListener clickListListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            startBottomSheet(id);
-            Log.d("MyLog", "id List = " + id + " pos " + position);
-
+            String selected = ((TextView) view.findViewById(R.id.textViewId)).getText().toString();
+            Log.d("MyLog", "id List = " + id + " pos " + position + " " + selected);
+            startBottomSheet(Long.valueOf(selected));
         }
-    };
+    };*/
 
     public void resetListView() {
         Date date = new Date();
@@ -141,12 +141,12 @@ public class FragmentList extends Fragment {
         }
 
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        SubjectsAdapter adapter = new SubjectsAdapter(getContext(), R.layout.item_subject, changeList,date,fragmentManager);
+
+        SubjectsAdapter adapter = new SubjectsAdapter(getContext(), R.layout.item_subject, changeList/*,date,fragmentManager*/);
         listViewOfDay.setAdapter(adapter);
         setListViewHeightBasedOnChildren(listViewOfDay);
         Log.d("MyLog", "================" + calendar.getTime() + " " + subjectList.size());
     }
-
     public void setListViewHeightBasedOnChildren(ListView listView) {
         ListAdapter listAdapter = listView.getAdapter();
         if (listAdapter == null)

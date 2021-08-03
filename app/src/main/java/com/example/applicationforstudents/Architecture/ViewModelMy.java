@@ -57,4 +57,7 @@ public class ViewModelMy extends AndroidViewModel {
     public Subject getElementForId(long id){
         return repository.getElementForId(id);
     }
+    public void deleteAll(){
+        repository.deleteAll();
+    }
 }

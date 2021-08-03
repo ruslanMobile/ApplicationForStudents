@@ -124,7 +124,7 @@ public class CustomBottomSheet extends BottomSheetDialogFragment {
             editTextNote.setText(cursor.getString(cursor.getColumnIndex(Constants.COLUMN_NOTE)));
             dataBaseManager.close();*/
 
-            //subject = viewModelMy.getElementForId(idEl+1);
+            subject = viewModelMy.getElementForId(idEl);
             editTextSubject.setText(subject.getName());
             editTextTime.setText(subject.getTime());
             editTextAudience.setText(subject.getAudience());

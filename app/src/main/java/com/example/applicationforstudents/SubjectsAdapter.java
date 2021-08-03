@@ -35,23 +35,32 @@ public class SubjectsAdapter extends ArrayAdapter<com.example.applicationforstud
     private LayoutInflater layoutInflater;
     private List<com.example.applicationforstudents.Room.Subject> list;
     private int layout;
-    private Context context;
+    //private Context context;
     //
-    String dayWithMonth,fullDate;
+    /*String dayWithMonth,fullDate;
     long id;
-    FragmentManager fragmentManager;
+    FragmentManager fragmentManager;*/
     Subject subject;
+
+   /* public OnClick onClick;
+    interface OnClick{
+        void click(long id);
+    }*/
+
+
     //
-    public SubjectsAdapter(Context context, int resource, List<com.example.applicationforstudents.Room.Subject> objects, Date date, FragmentManager fragmentManager) {
+    public SubjectsAdapter(Context context, int resource, List<com.example.applicationforstudents.Room.Subject> objects/*, Date date, FragmentManager fragmentManager*/) {
         super(context,resource,objects);
         this.layoutInflater = LayoutInflater.from(context);
         this.layout = resource;
         this.list = objects;
-        this.context = context;
+
+        //this.context = context;
+        //this.onClick = (OnClick) context;
         //
-        dayWithMonth = new SimpleDateFormat("EEEE, d MMMM").format(date);
+        /*dayWithMonth = new SimpleDateFormat("EEEE, d MMMM").format(date);
         fullDate = new SimpleDateFormat("yyyy.MM.dd").format(date);
-        this.fragmentManager = fragmentManager;
+        this.fragmentManager = fragmentManager;*/
     }
 
     @NonNull
@@ -75,7 +84,8 @@ public class SubjectsAdapter extends ArrayAdapter<com.example.applicationforstud
         TextView textNameOfTeacher = view.findViewById(R.id.textNameOfTeacher);*/
 
         subject = list.get(position);
-        id = subject.getId();
+        //id = subject.getId();
+        //Log.d("MyLog","Id list elements" + id);
         /*textClock.setText(subject.getTime());
         textTypeOfLesson.setText(subject.getType());
         textNameOfAudience.setText(subject.getAudience());
@@ -87,6 +97,14 @@ public class SubjectsAdapter extends ArrayAdapter<com.example.applicationforstud
         viewHolder.textNameOfAudience.setText(subject.getAudience());
         viewHolder.textNameOfLesson.setText(subject.getName());
         viewHolder.textNameOfTeacher.setText(subject.getTeacher());
+        viewHolder.textViewId.setText(String.valueOf(subject.getId()));
+
+       /*viewHolder.myview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClick.click(subject.getId());
+            }
+        });*/
 
         if (subject.getNote().equals("")) {
             viewHolder.textNote.setVisibility(View.GONE);
@@ -97,13 +115,14 @@ public class SubjectsAdapter extends ArrayAdapter<com.example.applicationforstud
     }
 
     private class ViewHolder {
-        final TextView textClock,textTypeOfLesson,textNameOfAudience,textNameOfLesson,textNote,textNameOfTeacher;
+        final TextView textClock,textTypeOfLesson,textNameOfAudience,textNameOfLesson,textNote,textNameOfTeacher,textViewId;
         View myview;
         ViewHolder(View view){
             myview = view;
-            myview.setOnClickListener(new View.OnClickListener() {
+           /* myview.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Log.d("MyLog","Id Clickerr" + id);
                     Bundle bundle = new Bundle();
                     bundle.putString("fullDate", fullDate);
                     bundle.putString("dayWithMonth", dayWithMonth.substring(0, 1).toUpperCase() + dayWithMonth.substring(1));
@@ -114,13 +133,14 @@ public class SubjectsAdapter extends ArrayAdapter<com.example.applicationforstud
                     Log.d("MyLog","start bottomsssshet " + id);
                     customBottomSheet.show(fragmentManager, "");
                 }
-            });
+            });*/
             textClock = view.findViewById(R.id.textClock);
             textTypeOfLesson = view.findViewById(R.id.textTypeOfLesson);
             textNameOfAudience = view.findViewById(R.id.textNameOfAudience);
             textNameOfLesson = view.findViewById(R.id.textNameOfLesson);
             textNote = view.findViewById(R.id.textNote);
             textNameOfTeacher = view.findViewById(R.id.textNameOfTeacher);
+            textViewId = view.findViewById(R.id.textViewId);
         }
 
     }

@@ -30,6 +30,11 @@ android {
 }
 
 dependencies {
+    //recyclerView
+    implementation "androidx.recyclerview:recyclerview:1.2.1"
+    // For control over item selection of both touch and mouse driven selection
+    implementation "androidx.recyclerview:recyclerview-selection:1.1.0"
+
     //room
     implementation "androidx.room:room-runtime:2.3.0"
     annotationProcessor "androidx.room:room-compiler:2.3.0"

@@ -36,5 +36,8 @@ public class Repository {
     public Subject getElementForId(long id){
         return db.getDao().getElementForId(id);
     }
+    public void deleteAll(){
+        db.getDao().deleteAll();
+    }
 
 }
