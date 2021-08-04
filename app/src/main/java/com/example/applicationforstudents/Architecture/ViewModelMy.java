@@ -3,6 +3,7 @@ package com.example.applicationforstudents.Architecture;
 import android.app.Application;
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -49,6 +50,7 @@ public class ViewModelMy extends AndroidViewModel {
         repository.insert(subject);
     }
     public void upDate(Subject subject){
+        Log.d("MyLog","updateviewmodel");
        repository.upDate(subject);
     }
     public  void deleteForId(Subject subject){

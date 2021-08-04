@@ -2,6 +2,7 @@ package com.example.applicationforstudents.Room;
 
 import android.app.Application;
 import android.database.Cursor;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
@@ -28,6 +29,7 @@ public class Repository {
         db.getDao().insert(subject);
     }
     public void upDate(Subject subject){
+        Log.d("MyLog","updaterepository");
         db.getDao().upDate(subject);
     }
     public  void deleteForId(Subject subject){

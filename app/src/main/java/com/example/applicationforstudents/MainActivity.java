@@ -16,7 +16,7 @@ import com.example.applicationforstudents.Fragments.FragmentProfile;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
-public class MainActivity extends AppCompatActivity implements CustomBottomSheet.ISetListViewListener {
+public class MainActivity extends AppCompatActivity/* implements CustomBottomSheet.ISetListViewListener*/ {
     BottomNavigationView bottomNavigationView;
     FrameLayout frameLayoutFragment;
     LifecycleMy lifecycle = new LifecycleMy(this);
@@ -59,11 +59,11 @@ public class MainActivity extends AppCompatActivity implements CustomBottomSheet
         frameLayoutFragment = findViewById(R.id.fragment);
     }
 
-    @Override
+  /*  @Override
     public void setData() {
         FragmentList fragment = (FragmentList) getSupportFragmentManager()
                 .findFragmentById(R.id.fragment);
         if (fragment != null)
             fragment.resetListView();
-    }
+    }*/
 }

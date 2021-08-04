@@ -51,20 +51,20 @@ public class CustomBottomSheet extends BottomSheetDialogFragment {
     TextView textNameOfDay, errorSubject, errorTime, errorAudience;
     //DataBaseManager dataBaseManager;
     Bundle bundle;
-    ISetListViewListener iSetListViewListener;
+   // ISetListViewListener iSetListViewListener;
     Cursor cursor;
 
     ViewModelMy viewModelMy;
     Subject subject;
-    public interface ISetListViewListener {
+    /*public interface ISetListViewListener {
         void setData();
-    }
+    }*/
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         try {
-            iSetListViewListener = (ISetListViewListener) context;
+          //  iSetListViewListener = (ISetListViewListener) context;
         }catch (ClassCastException e){
             throw new ClassCastException(context.toString()+" need to impliment BottomSheetListener interface.");
         }
@@ -205,10 +205,15 @@ public class CustomBottomSheet extends BottomSheetDialogFragment {
                 }else{
                    /* dataBaseManager.upDate(editTextSubject.getText().toString(), editTextTeacher.getText().toString(), editTextType.getText().toString(),
                             editTextTime.getText().toString(), editTextAudience.getText().toString(), editTextNote.getText().toString(), bundle.getString("fullDate"),idEl+1);*/
-                    viewModelMy.upDate(subject);
+                    Log.d("MyLog","update");
+                    Log.d("MyLog",editTextSubject.getText().toString() +  editTextTeacher.getText().toString()+ editTextType.getText().toString()+
+                            editTextTime.getText().toString()+ editTextAudience.getText().toString()+ editTextNote.getText().toString()+ bundle.getString("fullDate"));
+                    viewModelMy.upDate(new Subject(editTextSubject.getText().toString(), editTextTeacher.getText().toString(), editTextType.getText().toString(),
+                            editTextTime.getText().toString(), editTextAudience.getText().toString(), editTextNote.getText().toString(), bundle.getString("fullDate")));
                 }
                 //dataBaseManager.close();
-                iSetListViewListener.setData();
+                Log.d("MyLog","updateTwo");
+                //iSetListViewListener.setData();
                 dismiss();
             }
         }
@@ -222,7 +227,7 @@ public class CustomBottomSheet extends BottomSheetDialogFragment {
             dataBaseManager.deleteForId(idEl+1);
             dataBaseManager.close();*/
             viewModelMy.deleteForId(subject);
-            iSetListViewListener.setData();
+            //iSetListViewListener.setData();
             dismiss();
         }
     };
