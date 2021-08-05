@@ -15,7 +15,6 @@ public class Repository {
     public Repository(Application application) {
         db = Database.getDatabase(application);
         liveData = db.getDao().getLiveData();
-        //db.getDao().insert(new Subject("Українська мова","Олена Ярославівна","Лекція","10:00-11:20","123А","Купити зошит для робіт","2021.07.29"));
     }
 
     public LiveData<List<Subject>> getLiveData() {
@@ -29,7 +28,6 @@ public class Repository {
         db.getDao().insert(subject);
     }
     public void upDate(Subject subject){
-        Log.d("MyLog","updaterepository " + subject.getId() + " " + subject.getName());
         db.getDao().upDate(subject);
     }
     public  void deleteForId(Subject subject){

@@ -1,35 +1,18 @@
 package com.example.applicationforstudents.Architecture;
 
 import android.app.Application;
-import android.content.Context;
-import android.database.Cursor;
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
+
 
 import com.example.applicationforstudents.Room.Repository;
 import com.example.applicationforstudents.Room.Subject;
 
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 public class ViewModelMy extends AndroidViewModel {
-    //LiveDataMy liveData = new LiveDataMy();
-
-    /*MutableLiveData liveData = new MutableLiveData();
-
-    public LiveData<Calendar> getLiveData() {
-        return liveData;
-    }
-    public void setData(Calendar calendar){
-        //liveData.seValue(calendar);
-        liveData.setValue(calendar);
-    }*/
     LiveData<List<Subject>> liveData;
     Repository repository;
 
@@ -50,8 +33,7 @@ public class ViewModelMy extends AndroidViewModel {
         repository.insert(subject);
     }
     public void upDate(Subject subject){
-        Log.d("MyLog","updateviewmodel");
-       repository.upDate(subject);
+        repository.upDate(subject);
     }
     public  void deleteForId(Subject subject){
        repository.deleteForId(subject);

@@ -1,8 +1,6 @@
 package com.example.applicationforstudents.Fragments;
 
 import android.app.DatePickerDialog;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -26,7 +24,6 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.applicationforstudents.R;
 import com.example.applicationforstudents.Architecture.ViewModelMy;
 import com.example.applicationforstudents.Room.Subject;
-import com.example.applicationforstudents.SQLite.DataBaseManager;
 import com.example.applicationforstudents.SubjectsAdapter;
 import com.github.jhonnyx2012.horizontalpicker.DatePickerListener;
 import com.github.jhonnyx2012.horizontalpicker.HorizontalPicker;
@@ -34,7 +31,6 @@ import com.github.jhonnyx2012.horizontalpicker.HorizontalPicker;
 import org.joda.time.DateTime;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
@@ -48,11 +44,8 @@ public class FragmentList extends Fragment {
     CustomBottomSheet customBottomSheet;
     ViewModelMy myModel;
     TextView textNameOfDay;
-    //DataBaseManager dataBaseManager;
     ListView listViewOfDay;
     String fullDate;
-
-    //
     List<Subject> subjectList = new LinkedList<>();
 
     @Nullable
@@ -64,17 +57,9 @@ public class FragmentList extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //Підключення ViewModel для збереження Calendar при зміні
+        //Підключення ViewModel
         myModel = new ViewModelProvider(this).get(ViewModelMy.class);
-        myModel.getLiveData().observe(getViewLifecycleOwner(), new Observer<List<com.example.applicationforstudents.Room.Subject>>() {
-            @Override
-            public void onChanged(List<com.example.applicationforstudents.Room.Subject> subjects) {
-                Log.d("MyLog", "+++ Change Live DAta");
-                subjectList = subjects;
-                resetListView();
-            }
-        });
-        // myModel.insert(new Subject("Українська моваuu","Олена","Лекція","10:00-11:20","123А","Купити зошит для робіт","2021.08.02"));
+        myModel.getLiveData().observe(getViewLifecycleOwner(),observerViewModel);
         /*
         if(savedInstanceState == null)
             calendar = Calendar.getInstance();
@@ -82,6 +67,7 @@ public class FragmentList extends Fragment {
             calendar = myModel.getLiveData().getValue();
             */
 
+        //Ініціалізація елементів
         textNameOfDay = view.findViewById(R.id.textNameOfDay);
 
         datePicker = view.findViewById(R.id.imageButtonCalendar);
@@ -98,26 +84,16 @@ public class FragmentList extends Fragment {
     }
 
     //Слухач для ViewModel
-//    Observer<Calendar> observerViewModel = new Observer<Calendar>() {
-//        @Override
-//        public void onChanged(Calendar calendarNew) {
-//            calendar = calendarNew;
-//            //Установка назви дня
-//            int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
-//            Date date = new Date();
-//            date.setTime(calendar.getTimeInMillis());
-//            String dayWeekText = new SimpleDateFormat("EEEE").format(date);
-//            textNameOfDay.setText(dayWeekText.substring(0, 1).toUpperCase() + dayWeekText.substring(1));
-//
-//                /*DateTime dateTime = new DateTime(calendar.getTime());
-//                horizontalPicker.setDate(dateTime);*/
-//            Log.d("MyLog", "SetDate " + calendar.getTime() + " , " + dayOfWeek + " , " + dayWeekText);
-//
-//            resetListView();
-//        }
-//    };
+    Observer<List<Subject>> observerViewModel = new Observer<List<Subject>>() {
+        @Override
+        public void onChanged(List<Subject> subjects) {
+            Log.d("MyLog", "+++ Change Live DAta");
+            subjectList = subjects;
+            resetListView();
+        }
+    };
 
-
+    //Слухач кліку на ListView
     AdapterView.OnItemClickListener clickListListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -127,6 +103,7 @@ public class FragmentList extends Fragment {
         }
     };
 
+    //Обновлення списку предметів на день
     public void resetListView() {
         Date date = new Date();
         date.setTime(calendar.getTimeInMillis());
@@ -140,13 +117,17 @@ public class FragmentList extends Fragment {
             }
         }
 
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-
-        SubjectsAdapter adapter = new SubjectsAdapter(getContext(), R.layout.item_subject, changeList/*,date,fragmentManager*/);
+        SubjectsAdapter adapter = new SubjectsAdapter(getContext(), R.layout.item_subject, changeList);
         listViewOfDay.setAdapter(adapter);
         setListViewHeightBasedOnChildren(listViewOfDay);
+
+        String dayWeekText = new SimpleDateFormat("EEEE").format(date);
+        textNameOfDay.setText(dayWeekText.substring(0, 1).toUpperCase() + dayWeekText.substring(1));
+
         Log.d("MyLog", "================" + calendar.getTime() + " " + subjectList.size());
     }
+
+    //Підбирання висоти ListView,щоб всі елементи поміщались
     public void setListViewHeightBasedOnChildren(ListView listView) {
         ListAdapter listAdapter = listView.getAdapter();
         if (listAdapter == null)
@@ -182,21 +163,11 @@ public class FragmentList extends Fragment {
             new DatePickerDialog(getContext(), dateListener, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
         }
     };
+
     //Слухач DatePickerDialog для зміни данних в ViewModel
     DatePickerDialog.OnDateSetListener dateListener = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-           /* calendar.set(Calendar.YEAR,year);
-            calendar.set(Calendar.MONTH,month);
-            calendar.set(Calendar.DAY_OF_MONTH,dayOfMonth);*/
-
-
-            /*Calendar calendar1 = Calendar.getInstance();
-            calendar1.set(Calendar.YEAR, year);
-            calendar1.set(Calendar.MONTH, month);
-            calendar1.set(Calendar.DAY_OF_MONTH, dayOfMonth);*/
-            //myModel.setData(calendar1);
-
             calendar.set(Calendar.YEAR, year);
             calendar.set(Calendar.MONTH, month);
             calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
@@ -231,18 +202,6 @@ public class FragmentList extends Fragment {
     DatePickerListener datePickerListener = new DatePickerListener() {
         @Override
         public void onDateSelected(DateTime dateSelected) {
-            //Log.d("MyLog", "================" + dateSelected.toString());
-            /*calendar.set(Calendar.YEAR,dateSelected.getYear());
-            calendar.set(Calendar.MONTH,dateSelected.getMonthOfYear()-1);
-            calendar.set(Calendar.DAY_OF_MONTH,dateSelected.getDayOfMonth());*/
-            //myModel.setData(dateSelected);
-
-            /*Calendar calendar1 = Calendar.getInstance();
-            calendar1.set(Calendar.YEAR, dateSelected.getYear());
-            calendar1.set(Calendar.MONTH, dateSelected.getMonthOfYear() - 1);
-            calendar1.set(Calendar.DAY_OF_MONTH, dateSelected.getDayOfMonth());*/
-            //  myModel.setData(calendar1);
-
             calendar.set(Calendar.YEAR, dateSelected.getYear());
             calendar.set(Calendar.MONTH, dateSelected.getMonthOfYear() - 1);
             calendar.set(Calendar.DAY_OF_MONTH, dateSelected.getDayOfMonth());

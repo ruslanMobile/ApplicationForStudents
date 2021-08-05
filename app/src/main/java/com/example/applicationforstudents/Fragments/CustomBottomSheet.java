@@ -1,10 +1,6 @@
 package com.example.applicationforstudents.Fragments;
 
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.res.Resources;
-import android.database.Cursor;
-import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
@@ -31,15 +27,11 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.applicationforstudents.Architecture.ViewModelMy;
 import com.example.applicationforstudents.R;
 import com.example.applicationforstudents.Room.Subject;
-import com.example.applicationforstudents.SQLite.Constants;
-import com.example.applicationforstudents.SQLite.DataBaseManager;
+
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 
 public class CustomBottomSheet extends BottomSheetDialogFragment {
     long idEl = -1;
@@ -49,26 +41,9 @@ public class CustomBottomSheet extends BottomSheetDialogFragment {
     Button cancel, save,delete;
     ImageButton close;
     TextView textNameOfDay, errorSubject, errorTime, errorAudience;
-    //DataBaseManager dataBaseManager;
     Bundle bundle;
-   // ISetListViewListener iSetListViewListener;
-    Cursor cursor;
-
     ViewModelMy viewModelMy;
     Subject subject;
-    /*public interface ISetListViewListener {
-        void setData();
-    }*/
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        try {
-          //  iSetListViewListener = (ISetListViewListener) context;
-        }catch (ClassCastException e){
-            throw new ClassCastException(context.toString()+" need to impliment BottomSheetListener interface.");
-        }
-    }
 
     //Встановлення стилізації CustomBottomSheet
     @Nullable
@@ -76,10 +51,6 @@ public class CustomBottomSheet extends BottomSheetDialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //Ініціалізація елементів
         bundle = getArguments();
-
-        subject = (Subject) bundle.getSerializable("subject");
-
-
         View view = inflater.inflate(R.layout.bottom_sheet, container, false);
         textNameOfDay = view.findViewById(R.id.textNameOfDayBottomSheet);
         textNameOfDay.setText(bundle.getString("dayWithMonth"));
@@ -113,18 +84,6 @@ public class CustomBottomSheet extends BottomSheetDialogFragment {
 
         Log.d("MyLog","id" + idEl);
         if(idEl >= 0) {
-           /* dataBaseManager = new DataBaseManager(getContext());
-            dataBaseManager.open();
-            cursor = dataBaseManager.getCursorForId(idEl+1);
-            cursor.moveToFirst();
-            editTextSubject.setText(cursor.getString(cursor.getColumnIndex(Constants.COLUMN_NAME_SUBJECT)));
-            editTextTime.setText(cursor.getString(cursor.getColumnIndex(Constants.COLUMN_TIME)));
-            editTextAudience.setText(cursor.getString(cursor.getColumnIndex(Constants.COLUMN_AUDIENCE)));
-            editTextTeacher.setText(cursor.getString(cursor.getColumnIndex(Constants.COLUMN_TEACHER)));
-            editTextType.setText(cursor.getString(cursor.getColumnIndex(Constants.COLUMN_TYPE_SUBJECT)));
-            editTextNote.setText(cursor.getString(cursor.getColumnIndex(Constants.COLUMN_NOTE)));
-            dataBaseManager.close();*/
-
             subject = viewModelMy.getElementForId(idEl);
             Log.d("MyLog","subject: " + subject.getId());
             editTextSubject.setText(subject.getName());
@@ -135,7 +94,6 @@ public class CustomBottomSheet extends BottomSheetDialogFragment {
             editTextNote.setText(subject.getNote());
         }else delete.setVisibility(View.GONE);
         //
-
         //Адаптер для Input з вибором типу пари
         String arrayLesson[] = getResources().getStringArray(R.array.typeOfLessonArray);
         ArrayAdapter arrayAdapter = new ArrayAdapter(getContext(), R.layout.choice_type_of_lesson, arrayLesson);
@@ -195,31 +153,18 @@ public class CustomBottomSheet extends BottomSheetDialogFragment {
     View.OnClickListener saveListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Log.d("MyLog","onClick");
             if (textCheckError()) {
-                /*dataBaseManager = new DataBaseManager(getContext());
-                dataBaseManager.open();*/
                 if(idEl == -1) {
-                    /*dataBaseManager.insert(editTextSubject.getText().toString(), editTextTeacher.getText().toString(), editTextType.getText().toString(),
-                            editTextTime.getText().toString(), editTextAudience.getText().toString(), editTextNote.getText().toString(), bundle.getString("fullDate"));*/
                     viewModelMy.insert(new Subject(editTextSubject.getText().toString(), editTextTeacher.getText().toString(), editTextType.getText().toString(),
                             editTextTime.getText().toString(), editTextAudience.getText().toString(), editTextNote.getText().toString(), bundle.getString("fullDate")));
 
                 }else{
-                   /* dataBaseManager.upDate(editTextSubject.getText().toString(), editTextTeacher.getText().toString(), editTextType.getText().toString(),
-                            editTextTime.getText().toString(), editTextAudience.getText().toString(), editTextNote.getText().toString(), bundle.getString("fullDate"),idEl+1);*/
                     Log.d("MyLog","update");
-                    Log.d("MyLog",editTextSubject.getText().toString() +  editTextTeacher.getText().toString()+ editTextType.getText().toString()+
-                            editTextTime.getText().toString()+ editTextAudience.getText().toString()+ editTextNote.getText().toString()+ bundle.getString("fullDate"));
-
                     Subject newSubject = new Subject(editTextSubject.getText().toString(), editTextTeacher.getText().toString(), editTextType.getText().toString(),
                             editTextTime.getText().toString(), editTextAudience.getText().toString(), editTextNote.getText().toString(), bundle.getString("fullDate"));
                     newSubject.setId(subject.getId());
                     viewModelMy.upDate(newSubject);
                 }
-                //dataBaseManager.close();
-                Log.d("MyLog","updateTwo");
-                //iSetListViewListener.setData();
                 dismiss();
             }
         }
@@ -228,12 +173,7 @@ public class CustomBottomSheet extends BottomSheetDialogFragment {
     View.OnClickListener deleteElementListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            /*dataBaseManager = new DataBaseManager(getContext());
-            dataBaseManager.open();
-            dataBaseManager.deleteForId(idEl+1);
-            dataBaseManager.close();*/
             viewModelMy.deleteForId(subject);
-            //iSetListViewListener.setData();
             dismiss();
         }
     };
