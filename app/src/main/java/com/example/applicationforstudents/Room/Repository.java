@@ -29,7 +29,7 @@ public class Repository {
         db.getDao().insert(subject);
     }
     public void upDate(Subject subject){
-        Log.d("MyLog","updaterepository");
+        Log.d("MyLog","updaterepository " + subject.getId() + " " + subject.getName());
         db.getDao().upDate(subject);
     }
     public  void deleteForId(Subject subject){

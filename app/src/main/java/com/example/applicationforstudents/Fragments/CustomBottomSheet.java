@@ -79,6 +79,7 @@ public class CustomBottomSheet extends BottomSheetDialogFragment {
 
         subject = (Subject) bundle.getSerializable("subject");
 
+
         View view = inflater.inflate(R.layout.bottom_sheet, container, false);
         textNameOfDay = view.findViewById(R.id.textNameOfDayBottomSheet);
         textNameOfDay.setText(bundle.getString("dayWithMonth"));
@@ -125,6 +126,7 @@ public class CustomBottomSheet extends BottomSheetDialogFragment {
             dataBaseManager.close();*/
 
             subject = viewModelMy.getElementForId(idEl);
+            Log.d("MyLog","subject: " + subject.getId());
             editTextSubject.setText(subject.getName());
             editTextTime.setText(subject.getTime());
             editTextAudience.setText(subject.getAudience());
@@ -193,6 +195,7 @@ public class CustomBottomSheet extends BottomSheetDialogFragment {
     View.OnClickListener saveListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            Log.d("MyLog","onClick");
             if (textCheckError()) {
                 /*dataBaseManager = new DataBaseManager(getContext());
                 dataBaseManager.open();*/
@@ -208,8 +211,11 @@ public class CustomBottomSheet extends BottomSheetDialogFragment {
                     Log.d("MyLog","update");
                     Log.d("MyLog",editTextSubject.getText().toString() +  editTextTeacher.getText().toString()+ editTextType.getText().toString()+
                             editTextTime.getText().toString()+ editTextAudience.getText().toString()+ editTextNote.getText().toString()+ bundle.getString("fullDate"));
-                    viewModelMy.upDate(new Subject(editTextSubject.getText().toString(), editTextTeacher.getText().toString(), editTextType.getText().toString(),
-                            editTextTime.getText().toString(), editTextAudience.getText().toString(), editTextNote.getText().toString(), bundle.getString("fullDate")));
+
+                    Subject newSubject = new Subject(editTextSubject.getText().toString(), editTextTeacher.getText().toString(), editTextType.getText().toString(),
+                            editTextTime.getText().toString(), editTextAudience.getText().toString(), editTextNote.getText().toString(), bundle.getString("fullDate"));
+                    newSubject.setId(subject.getId());
+                    viewModelMy.upDate(newSubject);
                 }
                 //dataBaseManager.close();
                 Log.d("MyLog","updateTwo");

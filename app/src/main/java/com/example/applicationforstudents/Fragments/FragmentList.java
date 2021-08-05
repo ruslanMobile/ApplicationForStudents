@@ -169,7 +169,7 @@ public class FragmentList extends Fragment {
         }
 
         ViewGroup.LayoutParams params = listView.getLayoutParams();
-        params.height = (int) (totalHeight + ((listView.getDividerHeight() + (getResources().getDimension(R.dimen.dividerHeight) / 2)) * (listAdapter.getCount())));
+        params.height = (int) (totalHeight + ((listView.getDividerHeight() + (getResources().getDimension(R.dimen.dividerHeight) /**/ )) * (listAdapter.getCount())));
 
         listView.setLayoutParams(params);
         listView.requestLayout();
