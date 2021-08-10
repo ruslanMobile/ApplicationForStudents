@@ -6,32 +6,20 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF">
 
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/view2"
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/photoProfile"
         android:layout_width="52dp"
         android:layout_height="52dp"
-        android:layout_centerHorizontal="true"
         android:layout_marginStart="25dp"
         android:layout_marginLeft="25dp"
         android:layout_marginTop="25dp"
-        android:elevation="12dp"
-        app:cardCornerRadius="40dp"
+        android:src="@drawable/photo_profile"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints">
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/imageView1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:src="@drawable/photo_profile" />
-
-    </androidx.cardview.widget.CardView>
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/nameOfPerson"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="14dp"
@@ -40,17 +28,119 @@
         android:text="Иннокентий Харитонов"
         android:textColor="#000000"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/view2"
-        app:layout_constraintStart_toEndOf="@+id/view2"
-        app:layout_constraintTop_toTopOf="@+id/view2" />
+        app:layout_constraintBottom_toBottomOf="@+id/photoProfile"
+        app:layout_constraintStart_toEndOf="@+id/photoProfile"
+        app:layout_constraintTop_toTopOf="@+id/photoProfile" />
 
     <View
-        android:id="@+id/horizontalLine"
+        android:id="@+id/horizontalLineProfile"
         android:layout_width="0dp"
         android:layout_height="1px"
         android:layout_marginTop="11dp"
         android:background="@color/horizontalLine"
-        app:layout_constraintEnd_toEndOf="@+id/textView2"
-        app:layout_constraintStart_toStartOf="@+id/view2"
-        app:layout_constraintTop_toBottomOf="@+id/view2" />
+        app:layout_constraintEnd_toEndOf="@+id/nameOfPerson"
+        app:layout_constraintStart_toStartOf="@+id/photoProfile"
+        app:layout_constraintTop_toBottomOf="@+id/photoProfile" />
+
+    <Button
+        android:id="@+id/buttonAboutMe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/transparent"
+        android:drawableLeft="@drawable/ic_profile_aboutme"
+        android:fontFamily="@font/roboto"
+        android:includeFontPadding="false"
+        android:inputType="text"
+        android:minHeight="0dp"
+        android:padding="0dp"
+        android:text="Обо мне"
+        android:textColor="@color/textDay"
+        android:textSize="15sp"
+        app:backgroundTint="@color/transparent"
+        app:layout_constraintBottom_toTopOf="@+id/buttonList"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalLineProfile"
+        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <Button
+        android:id="@+id/buttonList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@color/transparent"
+        android:drawableLeft="@drawable/ic_profile_list"
+        android:fontFamily="@font/roboto"
+        android:inputType="text"
+        android:minHeight="0dp"
+        android:padding="0dp"
+        android:text="Расписание"
+        android:textColor="@color/textDay"
+        android:textSize="15sp"
+        app:backgroundTint="@color/transparent"
+        app:layout_constraintBottom_toTopOf="@+id/buttonData"
+        app:layout_constraintStart_toStartOf="@+id/buttonAboutMe"
+        app:layout_constraintTop_toBottomOf="@+id/buttonAboutMe" />
+
+    <Button
+        android:id="@+id/buttonData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@color/transparent"
+        android:drawableLeft="@drawable/ic_profile_data"
+        android:fontFamily="@font/roboto"
+        android:inputType="text"
+        android:minHeight="0dp"
+        android:padding="0dp"
+        android:text="Данные"
+        android:textColor="@color/textDay"
+        android:textSize="15sp"
+        app:backgroundTint="@color/transparent"
+        app:layout_constraintBottom_toTopOf="@+id/buttonShortText"
+        app:layout_constraintStart_toStartOf="@+id/buttonList"
+        app:layout_constraintTop_toBottomOf="@+id/buttonList" />
+
+    <Button
+        android:id="@+id/buttonShortText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@color/transparent"
+        android:drawableLeft="@drawable/ic_profile_short_text"
+        android:fontFamily="@font/roboto"
+        android:inputType="text"
+        android:lineSpacingExtra="8sp"
+        android:minHeight="0dp"
+        android:padding="0dp"
+        android:text="Краткое руководство"
+        android:textColor="@color/textDay"
+        android:textSize="15sp"
+        app:backgroundTint="@color/transparent"
+        app:layout_constraintBottom_toTopOf="@+id/buttonAboutApp"
+        app:layout_constraintStart_toStartOf="@+id/buttonData"
+        app:layout_constraintTop_toBottomOf="@+id/buttonData" />
+
+    <Button
+        android:id="@+id/buttonAboutApp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@color/transparent"
+        android:drawableLeft="@drawable/ic_profile_about_app"
+        android:fontFamily="@font/roboto"
+        android:inputType="text"
+        android:minHeight="0dp"
+        android:padding="0dp"
+        android:text="О приложении"
+        android:textColor="@color/textDay"
+        android:textSize="15sp"
+        app:backgroundTint="@color/transparent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/buttonShortText"
+        app:layout_constraintTop_toBottomOf="@+id/buttonShortText" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
