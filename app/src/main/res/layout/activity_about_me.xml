@@ -4,14 +4,183 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E85A5A"
+    android:background="#FFFFFF"
     tools:context=".AboutMeActivity">
 
-    <Button
-        android:id="@+id/mmm"
+    <ImageButton
+        android:id="@+id/buttonBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
+        android:layout_marginStart="28dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="35dp"
+        android:background="@color/transparent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_button_back" />
+
+    <TextView
+        android:id="@+id/textViewAboutMe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="Обо мне"
+        android:textColor="@color/textDarkGrey"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonBack"
+        app:layout_constraintStart_toEndOf="@+id/buttonBack"
+        app:layout_constraintTop_toTopOf="@+id/buttonBack" />
+
+    <ImageButton
+        android:id="@+id/buttonEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginRight="18dp"
+        android:background="@color/transparent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_button_edit" />
+
+    <TextView
+        android:id="@+id/textViewGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="46dp"
+        android:fontFamily="@font/roboto"
+        android:text="Группа"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewCourse"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAboutMe"
+        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/textViewCourse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:fontFamily="@font/roboto"
+        android:text="Курс"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewDirection"
+        app:layout_constraintStart_toStartOf="@+id/textViewGroup"
+        app:layout_constraintTop_toBottomOf="@+id/textViewGroup" />
+
+    <TextView
+        android:id="@+id/textViewDirection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:fontFamily="@font/roboto"
+        android:text="Направление"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewStudentCard"
+        app:layout_constraintStart_toStartOf="@+id/textViewCourse"
+        app:layout_constraintTop_toBottomOf="@+id/textViewCourse" />
+
+    <TextView
+        android:id="@+id/textViewStudentCard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:fontFamily="@font/roboto"
+        android:text="Студенческий"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewProfTicket"
+        app:layout_constraintStart_toStartOf="@+id/textViewDirection"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDirection" />
+
+    <TextView
+        android:id="@+id/textViewProfTicket"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:fontFamily="@font/roboto"
+        android:text="Профбилет"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textViewStudentCard"
+        app:layout_constraintTop_toBottomOf="@+id/textViewStudentCard" />
+
+    <TextView
+        android:id="@+id/textViewEditGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="46dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:fontFamily="@font/roboto"
+        android:text="Не указано"
+        android:textColor="@color/textDarkGrey"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewEditCourse"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAboutMe"
+        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/textViewEditCourse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:fontFamily="@font/roboto"
+        android:text="Не указано"
+        android:textColor="@color/textDarkGrey"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewEditDirection"
+        app:layout_constraintEnd_toEndOf="@+id/textViewEditGroup"
+        app:layout_constraintTop_toBottomOf="@+id/textViewEditGroup" />
+
+    <TextView
+        android:id="@+id/textViewEditDirection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:fontFamily="@font/roboto"
+        android:text="Не указано"
+        android:textColor="@color/textDarkGrey"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewEditStudentCard"
+        app:layout_constraintEnd_toEndOf="@+id/textViewEditCourse"
+        app:layout_constraintTop_toBottomOf="@+id/textViewEditCourse" />
+
+    <TextView
+        android:id="@+id/textViewEditStudentCard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:fontFamily="@font/roboto"
+        android:text="Не указано"
+        android:textColor="@color/textDarkGrey"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewEditProfTicket"
+        app:layout_constraintEnd_toEndOf="@+id/textViewEditDirection"
+        app:layout_constraintTop_toBottomOf="@+id/textViewEditDirection" />
+
+    <TextView
+        android:id="@+id/textViewEditProfTicket"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:fontFamily="@font/roboto"
+        android:text="Не указано"
+        android:textColor="@color/textDarkGrey"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textViewEditStudentCard"
+        app:layout_constraintTop_toBottomOf="@+id/textViewEditStudentCard" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
