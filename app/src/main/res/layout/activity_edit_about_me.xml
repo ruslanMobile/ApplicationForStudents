@@ -4,10 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".EditAboutMeActivity">
 
     <ImageButton
-        android:id="@+id/buttonBack"
+        android:id="@+id/buttonBackEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
@@ -16,7 +17,8 @@
         android:background="@color/transparent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_button_back" />
+        app:srcCompat="@drawable/ic_button_back"/>
+
 
     <TextView
         android:id="@+id/textViewAboutMe"
@@ -28,12 +30,12 @@
         android:text="Обо мне"
         android:textColor="@color/textDarkGrey"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/buttonBack"
-        app:layout_constraintStart_toEndOf="@+id/buttonBack"
-        app:layout_constraintTop_toTopOf="@+id/buttonBack" />
+        app:layout_constraintBottom_toBottomOf="@+id/buttonBackEdit"
+        app:layout_constraintStart_toEndOf="@+id/buttonBackEdit"
+        app:layout_constraintTop_toTopOf="@+id/buttonBackEdit" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/editTextGroup"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -50,7 +52,7 @@
         android:singleLine="true"
         android:textColorHint="#666D7885"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName2"
+        app:layout_constraintBottom_toTopOf="@+id/editTextCourse"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewAboutMe"
@@ -58,7 +60,7 @@
         app:layout_constraintVertical_chainStyle="packed" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName2"
+        android:id="@+id/editTextCourse"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="21dp"
@@ -71,13 +73,13 @@
         android:singleLine="true"
         android:textColorHint="#666D7885"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName3"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+        app:layout_constraintBottom_toTopOf="@+id/editTextDirection"
+        app:layout_constraintEnd_toEndOf="@+id/editTextGroup"
+        app:layout_constraintStart_toStartOf="@+id/editTextGroup"
+        app:layout_constraintTop_toBottomOf="@+id/editTextGroup" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName3"
+        android:id="@+id/editTextDirection"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="21dp"
@@ -90,13 +92,13 @@
         android:singleLine="true"
         android:textColorHint="#666D7885"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName4"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName2"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName2"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
+        app:layout_constraintBottom_toTopOf="@+id/editTextStudentCard"
+        app:layout_constraintEnd_toEndOf="@+id/editTextCourse"
+        app:layout_constraintStart_toStartOf="@+id/editTextCourse"
+        app:layout_constraintTop_toBottomOf="@+id/editTextCourse" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName4"
+        android:id="@+id/editTextStudentCard"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="21dp"
@@ -109,13 +111,13 @@
         android:singleLine="true"
         android:textColorHint="#666D7885"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName5"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName3"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName3"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3" />
+        app:layout_constraintBottom_toTopOf="@+id/editTextProfTicket"
+        app:layout_constraintEnd_toEndOf="@+id/editTextDirection"
+        app:layout_constraintStart_toStartOf="@+id/editTextDirection"
+        app:layout_constraintTop_toBottomOf="@+id/editTextDirection" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName5"
+        android:id="@+id/editTextProfTicket"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="21dp"
@@ -129,21 +131,22 @@
         android:textColorHint="#666D7885"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName4"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName4"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName4" />
+        app:layout_constraintEnd_toEndOf="@+id/editTextStudentCard"
+        app:layout_constraintStart_toStartOf="@+id/editTextStudentCard"
+        app:layout_constraintTop_toBottomOf="@+id/editTextStudentCard" />
 
     <Button
-        android:id="@+id/buttonDeleteBottomSheet"
+        android:id="@+id/buttonSaveAboutMe"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:background="@drawable/background_button_blue"
         android:text="Сохранить"
         android:textSize="18sp"
+        android:textColor="@color/white"
         app:backgroundTint="@color/transparent"
         app:backgroundTintMode="add"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName5"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName5"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName5" />
+        app:layout_constraintEnd_toEndOf="@+id/editTextProfTicket"
+        app:layout_constraintStart_toStartOf="@+id/editTextProfTicket"
+        app:layout_constraintTop_toBottomOf="@+id/editTextProfTicket" />
 </androidx.constraintlayout.widget.ConstraintLayout>
