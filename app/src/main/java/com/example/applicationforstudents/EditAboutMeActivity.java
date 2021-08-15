@@ -15,7 +15,7 @@ public class EditAboutMeActivity extends AppCompatActivity {
     ImageButton buttonBackEdit;
     Button buttonSave;
     SharedPreferences sharedPreferences;
-    EditText editTextGroup,editTextCourse,editTextDirection,editTextStudentCard,editTextProfTicket;
+    EditText editTextName,editTextSurname,editTextGroup,editTextCourse,editTextDirection,editTextStudentCard,editTextProfTicket;
     private static final String PREFS_FILE = "Profile";
 
     @Override
@@ -26,6 +26,8 @@ public class EditAboutMeActivity extends AppCompatActivity {
 
         sharedPreferences = getSharedPreferences(PREFS_FILE,MODE_PRIVATE);
 
+        editTextName = findViewById(R.id.editTextName);
+        editTextSurname = findViewById(R.id.editTextSurname);
         editTextGroup = findViewById(R.id.editTextGroup);
         editTextCourse = findViewById(R.id.editTextCourse);
         editTextDirection = findViewById(R.id.editTextDirection);
@@ -48,6 +50,8 @@ public class EditAboutMeActivity extends AppCompatActivity {
     }
     //Ініціалізація полів для вводу з пам'яті
     public void initEditText(){
+        editTextName.setText(sharedPreferences.getString("Name",""));
+        editTextSurname.setText(sharedPreferences.getString("Surname",""));
         editTextGroup.setText(sharedPreferences.getString("GroupName",""));
         editTextCourse.setText(sharedPreferences.getString("CourseName",""));
         editTextDirection.setText(sharedPreferences.getString("DirectionName",""));
@@ -60,6 +64,8 @@ public class EditAboutMeActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             SharedPreferences.Editor prefEdit = sharedPreferences.edit();
+            prefEdit.putString("Name",editTextName.getText().toString());
+            prefEdit.putString("Surname",editTextSurname.getText().toString());
             prefEdit.putString("GroupName",editTextGroup.getText().toString());
             prefEdit.putString("CourseName",editTextCourse.getText().toString());
             prefEdit.putString("DirectionName",editTextDirection.getText().toString());

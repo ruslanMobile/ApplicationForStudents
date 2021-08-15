@@ -17,7 +17,7 @@
         android:background="@color/transparent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_button_back"/>
+        app:srcCompat="@drawable/ic_button_back" />
 
 
     <TextView
@@ -35,7 +35,7 @@
         app:layout_constraintTop_toTopOf="@+id/buttonBackEdit" />
 
     <EditText
-        android:id="@+id/editTextGroup"
+        android:id="@+id/editTextName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -46,6 +46,46 @@
         android:background="@drawable/background_edittext"
         android:ems="10"
         android:fontFamily="@font/roboto"
+        android:hint="Введите имя"
+        android:inputType="textPersonName"
+        android:paddingLeft="12dp"
+        android:singleLine="true"
+        android:textColorHint="#666D7885"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/editTextSurname"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAboutMe"
+        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <EditText
+        android:id="@+id/editTextSurname"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="21dp"
+        android:background="@drawable/background_edittext"
+        android:ems="10"
+        android:fontFamily="@font/roboto"
+        android:hint="Введите фамилию"
+        android:inputType="textPersonName"
+        android:paddingLeft="12dp"
+        android:singleLine="true"
+        android:textColorHint="#666D7885"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/editTextGroup"
+        app:layout_constraintEnd_toEndOf="@+id/editTextName"
+        app:layout_constraintStart_toStartOf="@+id/editTextName"
+        app:layout_constraintTop_toBottomOf="@+id/editTextName" />
+
+    <EditText
+        android:id="@+id/editTextGroup"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="21dp"
+        android:background="@drawable/background_edittext"
+        android:ems="10"
+        android:fontFamily="@font/roboto"
         android:hint="Введите группу"
         android:inputType="textPersonName"
         android:paddingLeft="12dp"
@@ -53,9 +93,9 @@
         android:textColorHint="#666D7885"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/editTextCourse"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewAboutMe"
+        app:layout_constraintEnd_toEndOf="@+id/editTextSurname"
+        app:layout_constraintStart_toStartOf="@+id/editTextSurname"
+        app:layout_constraintTop_toBottomOf="@+id/editTextSurname"
         app:layout_constraintVertical_bias="0.0"
         app:layout_constraintVertical_chainStyle="packed" />
 
@@ -142,8 +182,8 @@
         android:layout_marginTop="16dp"
         android:background="@drawable/background_button_blue"
         android:text="Сохранить"
-        android:textSize="18sp"
         android:textColor="@color/white"
+        android:textSize="18sp"
         app:backgroundTint="@color/transparent"
         app:backgroundTintMode="add"
         app:layout_constraintEnd_toEndOf="@+id/editTextProfTicket"

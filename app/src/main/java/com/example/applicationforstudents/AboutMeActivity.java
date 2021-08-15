@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 public class AboutMeActivity extends AppCompatActivity {
     ImageButton buttonBack,buttonEditText;
-    TextView textViewEditGroup,textViewEditCourse,textViewEditDirection,textViewEditStudentCard,textViewEditProfTicket;
+    TextView textViewEditName,textViewEditSurname,textViewEditGroup,textViewEditCourse,textViewEditDirection,textViewEditStudentCard,textViewEditProfTicket;
     private static final String PREFS_FILE = "Profile";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +21,8 @@ public class AboutMeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_about_me);
         getSupportActionBar().hide();
 
+        textViewEditName = findViewById(R.id.textViewEditName);
+        textViewEditSurname = findViewById(R.id.textViewEditSurname);
         textViewEditGroup = findViewById(R.id.textViewEditGroup);
         textViewEditCourse = findViewById(R.id.textViewEditCourse);
         textViewEditDirection = findViewById(R.id.textViewEditDirection);
@@ -53,6 +55,8 @@ public class AboutMeActivity extends AppCompatActivity {
         super.onStart();
         SharedPreferences sharedPreferences = getSharedPreferences(PREFS_FILE,MODE_PRIVATE);
         String str = "";
+        textViewEditName.setText((str = sharedPreferences.getString("Name","Не указано")).trim().equals("") ? "Не указано" : str);
+        textViewEditSurname.setText((str = sharedPreferences.getString("Surname","Не указано")).trim().equals("") ? "Не указано" : str);
         textViewEditGroup.setText((str = sharedPreferences.getString("GroupName","Не указано")).trim().equals("") ? "Не указано" : str);
         textViewEditCourse.setText((str = sharedPreferences.getString("CourseName","Не указано")).trim().equals("") ? "Не указано" : str);
         textViewEditDirection.setText((str = sharedPreferences.getString("DirectionName","Не указано")).trim().equals("") ? "Не указано" : str);

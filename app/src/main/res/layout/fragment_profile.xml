@@ -13,7 +13,6 @@
         android:layout_marginStart="25dp"
         android:layout_marginLeft="25dp"
         android:layout_marginTop="25dp"
-        android:src="@drawable/photo_profile"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,7 +24,7 @@
         android:layout_marginStart="14dp"
         android:layout_marginLeft="14dp"
         android:fontFamily="@font/roboto_medium"
-        android:text="Иннокентий Харитонов"
+        android:text="Имя не введено"
         android:textColor="#000000"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/photoProfile"
@@ -142,5 +141,15 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/buttonShortText"
         app:layout_constraintTop_toBottomOf="@+id/buttonShortText" />
+
+    <ImageView
+        android:id="@+id/addPhotoImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/photoProfile"
+        app:layout_constraintEnd_toEndOf="@+id/photoProfile"
+        app:layout_constraintTop_toTopOf="@+id/photoProfile"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/ic_addphoto" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
