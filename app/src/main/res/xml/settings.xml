@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory android:iconSpaceReserved="false"
+        android:title="Уведомления" app:iconSpaceReserved="false">
+        <CheckBoxPreference
+            android:key="notification" app:iconSpaceReserved="false"
+            android:title="Следущее занятие"
+            android:summary="10 мин"/>
+    </PreferenceCategory>
+</PreferenceScreen>

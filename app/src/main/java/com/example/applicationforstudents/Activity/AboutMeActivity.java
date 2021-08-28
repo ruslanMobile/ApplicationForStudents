@@ -1,15 +1,15 @@
-package com.example.applicationforstudents;
+package com.example.applicationforstudents.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import com.example.applicationforstudents.R;
 
 public class AboutMeActivity extends AppCompatActivity {
     ImageButton buttonBack,buttonEditText;
@@ -43,7 +43,7 @@ public class AboutMeActivity extends AppCompatActivity {
         buttonEditText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),EditAboutMeActivity.class);
+                Intent intent = new Intent(getApplicationContext(), EditAboutMeActivity.class);
                 startActivity(intent);
             }
         });

@@ -9,9 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ApplicationForStudents">
-        <activity android:name=".EditAboutMeActivity"></activity>
-        <activity android:name=".AboutMeActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".Activity.SettingsActivity"></activity>
+        <activity android:name=".Activity.EditAboutMeActivity" />
+        <activity android:name=".Activity.AboutMeActivity" />
+        <activity android:name=".Activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,6 +23,8 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+        <receiver android:name=".AlarmReceiver"/>
     </application>
 
 </manifest>

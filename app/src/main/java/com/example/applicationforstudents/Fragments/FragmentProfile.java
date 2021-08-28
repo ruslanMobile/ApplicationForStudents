@@ -8,7 +8,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,8 +20,9 @@ import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
-import com.example.applicationforstudents.AboutMeActivity;
+import com.example.applicationforstudents.Activity.AboutMeActivity;
 import com.example.applicationforstudents.R;
+import com.example.applicationforstudents.Activity.SettingsActivity;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -55,13 +55,20 @@ public class FragmentProfile extends Fragment {
             }
         });
 
-        nameOfPerson = view.findViewById(R.id.nameOfPerson);
         buttonList = view.findViewById(R.id.buttonList);
+        buttonList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), SettingsActivity.class);
+                startActivity(intent);
+            }
+        });
         buttonData = view.findViewById(R.id.buttonData);
         buttonShortText = view.findViewById(R.id.buttonShortText);
         buttonAboutApp = view.findViewById(R.id.buttonAboutApp);
         photoProfile = view.findViewById(R.id.photoProfile);
         photoProfile.setOnClickListener(photoProfileListener);
+        nameOfPerson = view.findViewById(R.id.nameOfPerson);
         initPhoto();
     }
 

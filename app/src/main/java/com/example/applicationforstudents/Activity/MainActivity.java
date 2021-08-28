@@ -1,4 +1,4 @@
-package com.example.applicationforstudents;
+package com.example.applicationforstudents.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +11,7 @@ import android.widget.FrameLayout;
 import com.example.applicationforstudents.Architecture.LifecycleMy;
 import com.example.applicationforstudents.Fragments.FragmentList;
 import com.example.applicationforstudents.Fragments.FragmentProfile;
+import com.example.applicationforstudents.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
