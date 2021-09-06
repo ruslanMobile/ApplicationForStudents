@@ -2,6 +2,7 @@ package com.example.applicationforstudents.Fragments;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.provider.SyncStateContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -21,6 +23,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.applicationforstudents.BuildConfig;
 import com.example.applicationforstudents.R;
 import com.example.applicationforstudents.Architecture.ViewModelMy;
 import com.example.applicationforstudents.Room.Subject;
@@ -140,17 +143,17 @@ public class FragmentList extends Fragment {
         for (int i = 0; i < listAdapter.getCount(); i++) {
             view = listAdapter.getView(i, view, listView);
 
-            if (i == 0)
+           // if (i == 0)
                 view.setLayoutParams(new ViewGroup.LayoutParams(desiredWidth,
                         ViewGroup.LayoutParams.MATCH_PARENT));
 
             view.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
             totalHeight += view.getMeasuredHeight();
-
+            Log.d("MyLog","TOTAL: " + totalHeight);
         }
 
         ViewGroup.LayoutParams params = listView.getLayoutParams();
-        params.height = (int) (totalHeight + ((listView.getDividerHeight() + (getResources().getDimension(R.dimen.dividerHeight) /**/ )) * (listAdapter.getCount())));
+        params.height = (int) (totalHeight + ((listView.getDividerHeight())) * (listAdapter.getCount()-1));
 
         listView.setLayoutParams(params);
         listView.requestLayout();

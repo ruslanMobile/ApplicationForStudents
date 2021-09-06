@@ -70,6 +70,7 @@
                 android:inputType="textPersonName"
                 android:paddingLeft="12dp"
                 android:singleLine="true"
+                android:textColor="@color/textDarkGrey"
                 android:textColorHint="#666D7885"
                 android:textSize="16sp" />
 
@@ -120,6 +121,7 @@
                         android:inputType="number"
                         android:maxLength="11"
                         android:paddingLeft="12dp"
+                        android:textColor="@color/textDarkGrey"
                         android:textColorHint="#666D7885" />
 
                     <TextView
@@ -160,6 +162,7 @@
                         android:hint="Введите текст"
                         android:inputType="textPersonName"
                         android:paddingLeft="12dp"
+                        android:textColor="@color/textDarkGrey"
                         android:textColorHint="#666D7885" />
 
                     <TextView
@@ -195,6 +198,7 @@
                 android:hint="Введите преподавателя"
                 android:inputType="textPersonName"
                 android:paddingLeft="12dp"
+                android:textColor="@color/textDarkGrey"
                 android:textColorHint="#666D7885"
                 android:textSize="16sp" />
 
@@ -231,7 +235,7 @@
                     android:paddingRight="15dp"
                     android:paddingBottom="16dp"
                     android:text="Выберите тип пары"
-                    android:textColor="#666D7885"
+                    android:textColor="@color/textDarkGreyOpacity"
                     android:textSize="16sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -257,6 +261,7 @@
                 android:inputType="textMultiLine|textPersonName"
                 android:paddingLeft="12dp"
                 android:paddingRight="12dp"
+                android:textColor="@color/textDarkGrey"
                 android:textColorHint="#666D7885"
                 android:textSize="16sp" />
 
@@ -269,6 +274,7 @@
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
                 android:text="УДАЛИТЬ"
+                android:textColor="#FFFFFF"
                 android:textSize="18sp"
                 app:backgroundTint="@color/transparent"
                 app:backgroundTintMode="add" />
@@ -311,6 +317,7 @@
             android:background="@drawable/background_button_blue"
             android:fontFamily="@font/roboto_medium"
             android:text="СОХРАНИТЬ"
+            android:textColor="#FFFFFF"
             android:textSize="16sp"
             app:backgroundTint="@color/transparent"
             app:backgroundTintMode="add" />

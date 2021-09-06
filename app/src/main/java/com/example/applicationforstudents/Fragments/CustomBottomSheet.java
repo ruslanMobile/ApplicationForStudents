@@ -121,6 +121,7 @@ public class CustomBottomSheet extends BottomSheetDialogFragment {
         String arrayLesson[] = getResources().getStringArray(R.array.typeOfLessonArray);
         ArrayAdapter arrayAdapter = new ArrayAdapter(getContext(), R.layout.choice_type_of_lesson, arrayLesson);
         autoCompleteTextView.setAdapter(arrayAdapter);
+        autoCompleteTextView.setDropDownBackgroundResource(R.color.white);
 
         getDialog().setOnShowListener(DialogOnShowListener);
         createNotificationChannel();

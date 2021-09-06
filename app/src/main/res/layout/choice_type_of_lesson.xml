@@ -5,4 +5,5 @@
     android:textColor="#666D7885"
     android:fontFamily="@font/roboto"
     android:text="textView"
-    android:padding="12dp" />
+    android:padding="12dp"
+    android:background="@color/white"/>
