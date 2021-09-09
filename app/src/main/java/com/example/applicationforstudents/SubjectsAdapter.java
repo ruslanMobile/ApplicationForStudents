@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 
@@ -22,7 +23,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelStoreOwner;
 
+import com.example.applicationforstudents.Architecture.ViewModelMy;
 import com.example.applicationforstudents.Fragments.CustomBottomSheet;
 import com.example.applicationforstudents.Fragments.FragmentList;
 import com.example.applicationforstudents.Room.Subject;
@@ -69,6 +73,7 @@ public class SubjectsAdapter extends ArrayAdapter<com.example.applicationforstud
             viewHolder.textNote.setVisibility(View.GONE);
         } else viewHolder.textNote.setText(subject.getNote());
 
+        //Log.d("MyLog","pos: " +position + " size: " + list.size());
         return convertView;
     }
 

@@ -39,7 +39,7 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-public class FragmentList extends Fragment {
+public class FragmentList extends Fragment{
     Calendar calendar = Calendar.getInstance();
     Button buttonAddElement;
     ImageButton datePicker;
@@ -132,7 +132,7 @@ public class FragmentList extends Fragment {
 
     //Підбирання висоти ListView,щоб всі елементи поміщались
     public void setListViewHeightBasedOnChildren(ListView listView) {
-        ListAdapter listAdapter = listView.getAdapter();
+       ListAdapter listAdapter = listView.getAdapter();
         if (listAdapter == null)
             return;
 
@@ -214,7 +214,7 @@ public class FragmentList extends Fragment {
 
 
     //Слухач Button для відкриття BottomSheet
-    View.OnClickListener addElement = new View.OnClickListener() {
+     View.OnClickListener addElement = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             startBottomSheet(-1);
