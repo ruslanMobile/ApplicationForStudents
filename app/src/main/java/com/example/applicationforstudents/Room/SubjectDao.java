@@ -9,26 +9,30 @@ import androidx.room.Update;
 
 import java.util.List;
 
+import io.reactivex.Completable;
+import io.reactivex.Flowable;
+import io.reactivex.Single;
+
 @Dao
 public interface SubjectDao {
     @Query("SELECT * FROM subjects WHERE date = :date_")
-    List<Subject> getSubjectsToDate(String date_);
+    Single<List<Subject>> getSubjectsToDate(String date_);
 
     @Query("SELECT * FROM subjects WHERE id= :id")
-    Subject getElementForId(long id);
+    Single<Subject> getElementForId(long id);
 
     @Insert
-    void insert(Subject subject);
+    Completable insert(Subject subject);
 
     @Update
-    void upDate(Subject subject);
+    Completable upDate(Subject subject);
 
     @Delete
-    void deleteForId(Subject subject);
+    Completable deleteForId(Subject subject);
 
     @Query("DELETE FROM subjects")
-    void deleteAll();
+    Completable deleteAll();
 
     @Query("SELECT * FROM subjects")
-    LiveData<List<Subject>> getLiveData();
+    Flowable<List<Subject>> getLiveData();
 }

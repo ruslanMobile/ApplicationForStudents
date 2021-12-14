@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,11 @@ import com.example.applicationforstudents.R;
 import com.example.applicationforstudents.Activity.SettingsActivity;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import io.reactivex.Maybe;
+import io.reactivex.Scheduler;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 import static android.app.Activity.RESULT_OK;
 import static android.content.Context.MODE_PRIVATE;
@@ -118,14 +124,29 @@ public class FragmentProfile extends Fragment {
 
     //Ініціалізація фото з пам'яті
     public void initPhoto() {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        /*SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         Uri uri = Uri.parse(preferences.getString("image", "null"));
         if (!String.valueOf(uri).equals("null")) {
             //Picasso.get().load(uri).fit().centerCrop().error(R.drawable.ic_emptyphoto).into(photoProfile);
             Glide.with(this).load(uri).centerCrop().fitCenter().into(photoProfile);
         }else {
             photoProfile.setImageResource(R.drawable.ic_emptyphoto);
-        }
+        }*/
+        Maybe.just(PreferenceManager.getDefaultSharedPreferences(getActivity()))
+                .subscribeOn(Schedulers.newThread())
+                .map(t->{
+                    return t.getString("image", "null");
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(i->{
+                    if (!String.valueOf(i).equals("null")) {
+                        Glide.with(this).load(i).centerCrop().fitCenter().into(photoProfile);
+                    }else {
+                        photoProfile.setImageResource(R.drawable.ic_emptyphoto);
+                    }
+                },e->{
+                    Log.d("MyLog","Error photo profile");
+                });
     }
 
     //Отримання Uri фотографії і збереження її в пам'ять

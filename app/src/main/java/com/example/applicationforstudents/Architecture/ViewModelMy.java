@@ -12,8 +12,12 @@ import com.example.applicationforstudents.Room.Subject;
 
 import java.util.List;
 
+import io.reactivex.Completable;
+import io.reactivex.Flowable;
+import io.reactivex.Single;
+
 public class ViewModelMy extends AndroidViewModel {
-    LiveData<List<Subject>> liveData;
+    Flowable<List<Subject>> liveData;
     Repository repository;
 
     public ViewModelMy(@NonNull Application application) {
@@ -22,26 +26,26 @@ public class ViewModelMy extends AndroidViewModel {
         liveData = repository.getLiveData();
     }
 
-    public LiveData<List<Subject>> getLiveData(){
+    public Flowable<List<Subject>> getLiveData(){
         return liveData;
     }
-    public List<Subject> getSubjectsToDate(String date){
+    public Single getSubjectsToDate(String date){
         return repository.getSubjectsToDate(date);
     }
 
-    public void insert(Subject subject){
-        repository.insert(subject);
+    public Completable insert(Subject subject){
+        return repository.insert(subject);
     }
-    public void upDate(Subject subject){
-        repository.upDate(subject);
+    public Completable upDate(Subject subject){
+        return repository.upDate(subject);
     }
-    public  void deleteForId(Subject subject){
-       repository.deleteForId(subject);
+    public Completable deleteForId(Subject subject){
+       return repository.deleteForId(subject);
     }
-    public Subject getElementForId(long id){
+    public Single getElementForId(long id){
         return repository.getElementForId(id);
     }
-    public void deleteAll(){
-        repository.deleteAll();
+    public Completable deleteAll(){
+        return repository.deleteAll();
     }
 }

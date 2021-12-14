@@ -9,35 +9,39 @@ import androidx.lifecycle.LiveData;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.Completable;
+import io.reactivex.Flowable;
+import io.reactivex.Single;
+
 public class Repository {
-    LiveData<List<Subject>> liveData;
+    Flowable<List<Subject>> liveData;
     Database db;
     public Repository(Application application) {
         db = Database.getDatabase(application);
         liveData = db.getDao().getLiveData();
     }
 
-    public LiveData<List<Subject>> getLiveData() {
+    public Flowable<List<Subject>> getLiveData() {
         return liveData;
     }
 
-    public List<Subject> getSubjectsToDate(String date){
+    public Single getSubjectsToDate(String date){
         return db.getDao().getSubjectsToDate(date);
     }
-    public void insert(Subject subject){
-        db.getDao().insert(subject);
+    public Completable insert(Subject subject){
+        return db.getDao().insert(subject);
     }
-    public void upDate(Subject subject){
-        db.getDao().upDate(subject);
+    public Completable upDate(Subject subject){
+        return db.getDao().upDate(subject);
     }
-    public  void deleteForId(Subject subject){
-        db.getDao().deleteForId(subject);
+    public  Completable deleteForId(Subject subject){
+        return db.getDao().deleteForId(subject);
     }
-    public Subject getElementForId(long id){
+    public Single getElementForId(long id){
         return db.getDao().getElementForId(id);
     }
-    public void deleteAll(){
-        db.getDao().deleteAll();
+    public Completable deleteAll(){
+        return db.getDao().deleteAll();
     }
 
 }

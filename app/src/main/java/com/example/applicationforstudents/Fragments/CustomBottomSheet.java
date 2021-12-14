@@ -1,4 +1,4 @@
-package com.example.applicationforstudents.Fragments;
+ package com.example.applicationforstudents.Fragments;
 
 import android.app.AlarmManager;
 import android.app.NotificationChannel;
@@ -47,6 +47,10 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 import static android.content.Context.ALARM_SERVICE;
 import static android.content.Context.NOTIFICATION_SERVICE;
@@ -106,7 +110,15 @@ public class CustomBottomSheet extends BottomSheetDialogFragment {
 
         Log.d("MyLog", "id" + idEl);
         if (idEl >= 0) {
-            subject = viewModelMy.getElementForId(idEl);
+            Disposable disposable = viewModelMy.getElementForId(idEl)
+
+                    .subscribe((i)->{
+                        Log.d("MyLog","GETELEMENTFORID");
+                        subject = (Subject) i;
+                    },e->{
+                        Log.d("MyLog","ERROR GETELEMENTFORID");
+                    });
+            //subject = viewModelMy.getElementForId(idEl);
             Log.d("MyLog", "subject: " + subject.getId());
             editTextSubject.setText(subject.getName());
             editTextTime.setText(subject.getTime());
@@ -180,8 +192,15 @@ public class CustomBottomSheet extends BottomSheetDialogFragment {
         public void onClick(View v) {
             if (textCheckError()) {
                 if (idEl == -1) {
-                    viewModelMy.insert(new Subject(editTextSubject.getText().toString(), editTextTeacher.getText().toString(), editTextType.getText().toString(),
-                            editTextTime.getText().toString(), editTextAudience.getText().toString(), editTextNote.getText().toString(), bundle.getString("fullDate")));
+                    Disposable disposable = viewModelMy.insert(new Subject(editTextSubject.getText().toString(), editTextTeacher.getText().toString(), editTextType.getText().toString(),
+                            editTextTime.getText().toString(), editTextAudience.getText().toString(), editTextNote.getText().toString(), bundle.getString("fullDate")))
+                            .subscribeOn(Schedulers.newThread())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(()->{
+                                Log.d("MyLog","COMPLETE");
+                            },e->{
+                                Log.d("MyLog","ERROR INSERT");
+                            });
 
                     createNotification();
                     Log.d("MyLog", "Alarm set seccess " + idCalendar.getTime());
@@ -190,7 +209,14 @@ public class CustomBottomSheet extends BottomSheetDialogFragment {
                     Subject newSubject = new Subject(editTextSubject.getText().toString(), editTextTeacher.getText().toString(), editTextType.getText().toString(),
                             editTextTime.getText().toString(), editTextAudience.getText().toString(), editTextNote.getText().toString(), bundle.getString("fullDate"));
                     newSubject.setId(subject.getId());
-                    viewModelMy.upDate(newSubject);
+                    Disposable disposable = viewModelMy.upDate(newSubject)
+                            .subscribeOn(Schedulers.newThread())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(()->{
+                                Log.d("MyLog","COMPLETE");
+                            },e->{
+                                Log.d("MyLog","ERROR UPDATE");
+                            });
 
                     //Видалення старої версії сповіщення
                     Intent intent = new Intent(getActivity(), AlarmReceiver.class);
@@ -266,7 +292,14 @@ public class CustomBottomSheet extends BottomSheetDialogFragment {
     View.OnClickListener deleteElementListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            viewModelMy.deleteForId(subject);
+            Disposable disposable = viewModelMy.deleteForId(subject)
+                    .subscribeOn(Schedulers.newThread())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(()->{
+                        Log.d("MyLog","DELETE");
+                    },e->{
+                        Log.d("MyLog","ERROR DELETE");
+                    });
 
             Calendar calendar = getIdCalendar();
             Intent intent = new Intent(getActivity(), AlarmReceiver.class);

@@ -39,6 +39,11 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+import io.reactivex.Scheduler;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
+
 public class FragmentList extends Fragment{
     Calendar calendar = Calendar.getInstance();
     Button buttonAddElement;
@@ -62,7 +67,18 @@ public class FragmentList extends Fragment{
         super.onViewCreated(view, savedInstanceState);
         //Підключення ViewModel
         myModel = new ViewModelProvider(this).get(ViewModelMy.class);
-        myModel.getLiveData().observe(getViewLifecycleOwner(),observerViewModel);
+        //myModel.getLiveData().observe(getViewLifecycleOwner(),observerViewModel);
+
+        Disposable disposable = myModel.getLiveData()
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(i->{
+                    Log.d("MyLog", "+++ Change Live DAta");
+                    subjectList = i;
+                    resetListView();
+                },e->{
+                    Log.d("MyLog", "Error");
+                });
         /*
         if(savedInstanceState == null)
             calendar = Calendar.getInstance();
