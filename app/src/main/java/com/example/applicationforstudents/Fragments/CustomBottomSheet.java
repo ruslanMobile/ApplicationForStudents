@@ -220,7 +220,7 @@ public class CustomBottomSheet extends BottomSheetDialogFragment {
 
                     //Видалення старої версії сповіщення
                     Intent intent = new Intent(getActivity(), AlarmReceiver.class);
-                    PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), (int) (idCalendar.getTimeInMillis()/1000), intent, 0);
+                    PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), (int) (idCalendar.getTimeInMillis()/1000), intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
                     alarmManager.cancel(pendingIntent);
                     //
                     createNotification();
@@ -239,7 +239,7 @@ public class CustomBottomSheet extends BottomSheetDialogFragment {
         intent.putExtra("Name",editTextSubject.getText().toString());
         intent.putExtra("timeId",(int) (idCalendar.getTimeInMillis()/1000));
 
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), (int) (idCalendar.getTimeInMillis()/1000), intent, 0);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), (int) (idCalendar.getTimeInMillis()/1000), intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             alarmManager.setWindow(AlarmManager.RTC_WAKEUP,idCalendar.getTimeInMillis(),1000,pendingIntent);
@@ -303,7 +303,7 @@ public class CustomBottomSheet extends BottomSheetDialogFragment {
 
             Calendar calendar = getIdCalendar();
             Intent intent = new Intent(getActivity(), AlarmReceiver.class);
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), (int) (calendar.getTimeInMillis()/1000), intent, 0);
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), (int) (calendar.getTimeInMillis()/1000), intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
             alarmManager.cancel(pendingIntent);
 
             Log.d("MyLog","Delete notification");
@@ -335,11 +335,11 @@ public class CustomBottomSheet extends BottomSheetDialogFragment {
         @Override
         public void onShow(DialogInterface dialog) {
             BottomSheetDialog d = (BottomSheetDialog) dialog;
-            FrameLayout bottomSheet = (FrameLayout) d.findViewById(R.id.design_bottom_sheet);
-            CoordinatorLayout coordinatorLayout = (CoordinatorLayout) bottomSheet.getParent();
-            BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
-            bottomSheetBehavior.setPeekHeight(bottomSheet.getHeight());
-            coordinatorLayout.getParent().requestLayout();
+//            FrameLayout bottomSheet = (FrameLayout) d.findViewById(R.id.design_bottom_sheet);
+//            CoordinatorLayout coordinatorLayout = (CoordinatorLayout) bottomSheet.getParent();
+//            BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
+//            bottomSheetBehavior.setPeekHeight(bottomSheet.getHeight());
+//            coordinatorLayout.getParent().requestLayout();
         }
     };
 

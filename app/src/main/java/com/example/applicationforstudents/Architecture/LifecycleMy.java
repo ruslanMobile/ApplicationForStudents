@@ -16,7 +16,7 @@ public class LifecycleMy implements LifecycleObserver {
 
     @OnLifecycleEvent(androidx.lifecycle.Lifecycle.Event.ON_CREATE)
     public void locale(){
-        Locale locale = new Locale("ru");
+        Locale locale = new Locale("ua");
         Locale.setDefault(locale);
         Configuration config = new Configuration();
         config.locale = locale;

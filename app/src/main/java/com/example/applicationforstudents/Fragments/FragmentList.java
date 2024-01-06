@@ -23,7 +23,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.applicationforstudents.BuildConfig;
 import com.example.applicationforstudents.R;
 import com.example.applicationforstudents.Architecture.ViewModelMy;
 import com.example.applicationforstudents.Room.Subject;

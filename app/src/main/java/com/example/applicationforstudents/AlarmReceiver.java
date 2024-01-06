@@ -23,7 +23,7 @@ public class AlarmReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
 
         Intent i = new Intent(context, MainActivity.class);
-        PendingIntent pendingIntentOpen = PendingIntent.getActivity(context,0,i,0);
+        PendingIntent pendingIntentOpen = PendingIntent.getActivity(context,0,i,PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
         SharedPreferences prefs= PreferenceManager.getDefaultSharedPreferences(context);
         boolean b = prefs.getBoolean("notification", false);
@@ -43,7 +43,7 @@ public class AlarmReceiver extends BroadcastReceiver {
             notificationManagerCompat.notify(200, builder.build());
         }
 
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, intent.getIntExtra("timeId",0), intent, 0);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, intent.getIntExtra("timeId",0), intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
         alarmManager.cancel(pendingIntent);
 

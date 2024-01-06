@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Locale locale = new Locale("ru");
+        Locale locale = new Locale("ua");
         Locale.setDefault(locale);
         Configuration config = new Configuration();
         config.locale = locale;
